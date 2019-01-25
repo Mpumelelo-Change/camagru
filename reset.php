@@ -1,0 +1,50 @@
+<?php
+
+require_once './functions/class.user.php';
+$user_home = new USER();
+
+if (!$user_home->is_logged_in())
+{
+     $user_home->redirect('index.php');
+}
+
+$stmt = $user_home->runQuery("SELECT * FROM `camagru_db`.`users` WHERE `user_id`=:uid");
+$stmt->bindparam(":uid",$_SESSION['user_session']);
+$stmt->execute();
+$row = $stmt->fetch(PDO::FETCH_ASSOC);
+
+var_dump($_REQUEST);
+?>
+
+
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Password Reset</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
+    <script src="main.js"></script>
+</head>
+<body id="login">
+    <div class="container">
+        <div class='alert alert-success'>
+        <strong>Hello </strong>  <?php echo $row['user_name'] ?> you are here to reset your forgetton password.
+    </div>
+        <form class="form-signin" method="POST" action="functions/reset_pass.php">
+            <h3 class="form-signin-heading">Password Reset.</h3><hr />
+            <?php
+            if(isset($msg)) 
+            {
+                echo $msg;
+            }
+            ?>
+            <input type="password" class="input-block-level" placeholder="New Password" name="pass" required />
+            <input type="password" class="input-block-level" placeholder="Confirm New Password" name="confirm-pass" required />
+            <hr />
+            <button class="btn btn-large btn-primary" type="submit" name="btn-reset-pass">Reset Your Password</button>
+        </form>
+    </div>
+</body>
+</html>

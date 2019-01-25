@@ -1,0 +1,38 @@
+.booth {
+    width: 400px;
+    background-color: #ccc;
+    border: 10px solid #ddd;
+    margin: 0 auto;
+}
+
+.booth-capture-btn {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: darkturquoise;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+
+.button-btn {
+    display: block;
+    margin: 10px 0;
+    padding: 10px 20px;
+    background-color: darkturquoise;
+    color: #fff;
+    text-align: center;
+    text-decoration: none;
+}
+
+.form-popup {
+    display: none;
+    position: fixed;
+    background-color: #fff;
+    border: 3px solid #f1f1f1;
+    z-index: 9;
+  }
+
+#canvas {
+    display: none;
+}
