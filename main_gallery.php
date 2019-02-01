@@ -1,19 +1,17 @@
 <?php
-require_once './functions/class.user.php';
+require_once 'functions/class.user.php';
 $user_home = new USER();
-if (!$user_home->is_logged_in())
+if ($user_home->is_logged_in())
 {
      $user_home->redirect('index.php');
 }
 
-$stmt = $user_home->runQuery("SELECT * FROM `camagru_db`.`users` WHERE `user_id`=:uid");
-$stmt->bindparam(":uid",$_SESSION['user_session']);
+$stmt = $user_home->runQuery("SELECT * FROM `camagru_db`.`users`");
 $stmt->execute();
 $row = $stmt->fetch(PDO::FETCH_ASSOC);
 $_SESSION[ 'user_id' ] = $row[ 'user_id' ];
 $_SESSION[ 'user_name' ] = $row[ 'user_name' ];
 $_SESSION[ 'user_mail' ] = $row[ 'user_mail' ];
-
 ?>
 
 <!DOCTYPE html>
@@ -83,7 +81,6 @@ $_SESSION[ 'user_mail' ] = $row[ 'user_mail' ];
             while ($row = $stmt->fetch()) {
                 $img = str_replace(' ', '+', $row['title']);
                 $assc_arr += array($img=>$row['image_id']);
-
                 echo '
                 <div class="img-com-container">
                 <img src= ' . $img . ' />
@@ -94,7 +91,6 @@ $_SESSION[ 'user_mail' ] = $row[ 'user_mail' ];
                 </form>
                 <div id="all_comments">
                     <div id="comment_div">';
-                //$_SESSION['image_id'] = $row['image_id'];
                 $comm = $conn->prepare("SELECT * FROM camagru_db.comments");
                 $comm->execute();
                 while($s_row = $comm->fetch())
@@ -102,9 +98,9 @@ $_SESSION[ 'user_mail' ] = $row[ 'user_mail' ];
                     $comment=$s_row['comment'];
                     if ($row['image_id'] == $s_row['image_id']) {
                         echo '<p class="comment">';
+                        echo $comment;
                     }
-                        ?>
-                        <?php if($row['image_id'] == $s_row['image_id']) {echo $comment;}?></p>
+                    ?>
                     <?php echo '</div>
                 </div>
                 </div>';

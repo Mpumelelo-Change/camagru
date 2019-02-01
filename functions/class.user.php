@@ -1,7 +1,5 @@
 <?php
 
-require_once 'config/setup.php';
-
 class USER
 {
 
@@ -76,20 +74,20 @@ class USER
                     }
                     else
                     {
-                        header("Location: ../index.php?error");
-                        exit;
+                        header("Location: ../index.php?udakiwe");
+                        //exit;
                     }
                 }
                 else
                 {
                     header("Location: ../index.php?inactive");
-                    exit;
+                   // exit;
                 }
             }
             else
             {
                 header("Location: ../index.php?error");
-                exit;
+                //exit;
             }
         }
         catch(PDOException $e)

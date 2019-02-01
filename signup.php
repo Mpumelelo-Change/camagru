@@ -2,6 +2,7 @@
 require_once 'config/setup.php';
 require_once 'functions/class.user.php';
 
+echo "Alice in Wonderland";
 $reg_user = new USER;
 
 if (isset($_POST['btn-signup']))
@@ -33,7 +34,7 @@ if (isset($_POST['btn-signup']))
                 Welcome to Camagru!
                 To complete your registration, click on the link,
                 Click 
-                http://localhost:8080/camagru/functions/verify.php?user_token=$code
+                http://localhost:8080/camagru-master/functions/verify.php?user_token=$code
                 Choke on a dag of bicks,";
 
             $subject = "Confirm Registration";
@@ -66,8 +67,6 @@ if (isset($_POST['btn-signup']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>SIGNUP</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
-    <script src="main.js"></script>
 </head>
 <body>
     <div id="login">

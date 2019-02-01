@@ -1,5 +1,8 @@
 <?php
-    echo $_SESSION['user_id'];
+    require_once 'config/setup.php';
+    require_once 'functions/class.user.php';
+
+    $mo_fo = new USER();
 ?>
 
 <!DOCTYPE html>

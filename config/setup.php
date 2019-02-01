@@ -13,6 +13,4 @@ try {
     echo $e->getMessage();
 }
 
-include_once 'class.user.php';
-$user = new USER($conn);
 ?>

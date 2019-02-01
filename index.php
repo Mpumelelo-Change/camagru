@@ -1,5 +1,6 @@
 <?php
-require_once 'config/database.php';
+//require_once 'config/database.php';
+require_once 'config/setup.php';
 require_once 'functions/class.user.php';
 $user_login = new USER();
 
@@ -21,8 +22,6 @@ if (isset($_POST['btn-login']))
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <title>Camagru</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link rel="stylesheet" type="text/css" media="screen" href="index.css" />
-    <script src="main.js"></script>
 </head>
 <body id="login">
     <div class="container">
@@ -51,7 +50,7 @@ if (isset($_POST['btn-login']))
     <hr />
     <button class="btn btn-large btn-primary" type="submit" name="btn-login">Sign in</button>
     <a href="signup.php" style="float:right;" class="btn btn-large">Sign Up</a><hr />
-    <a href="fpass.php">Lost your Password ? </a>
+    <a href="forgot.php">Lost your Password ? </a>
     </form>
     </div>
 </body>

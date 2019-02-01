@@ -2,6 +2,7 @@
 require_once 'class.user.php';
 $user = new USER();
 
+echo "There's a natual mystic";
 if ( isset($_GET['user_token']))
 {
     $code = $_GET['user_token'];
@@ -11,15 +12,16 @@ if ( isset($_GET['user_token']))
     $stmt->execute(array(":code"=>$code));
     $row = $stmt->fetch(PDO::FETCH_ASSOC);
 
+    echo "If you listen carefully now, you could hear";
     if ($stmt->rowCount() > 0)
-    {       
+    {
+        echo "I won't tell no lie";
         $stmt = $user->runQuery("UPDATE camagru_db.users SET user_stat=:status WHERE user_id=:uID");
         $stmt->bindparam(":status",$statusY);
         $stmt->bindparam(":uID",$row['user_id']);
 
         if ( $stmt->execute()) {
-            echo "Registration success";
-            $stmt = $user->runQuery();
+            echo "Registration successFUL";
             header("Location: ../index.php");
         }     
     }

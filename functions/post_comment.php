@@ -12,6 +12,7 @@ if (isset($_POST['user_comm'])) {
     
     $comment = $_POST['user_comm'];
     $id = $_SESSION['image_id'];
+
     $stmt = $conn->prepare("INSERT INTO camagru_db.comments(comment, image_id) VALUES ('$comment', '$id')");
     $stmt->execute();
 
