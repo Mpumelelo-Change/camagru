@@ -24,6 +24,7 @@ if ($user_home->is_logged_in())
         <div class='alert alert-success'>
         <strong>Hello </strong>  <?php echo $row['user_name'] ?> you are here to reset your forgetton password.
     </div>
+    <div>
         <form class="form-signin" method="POST" action="functions/reset_pass.php">
             <h3 class="form-signin-heading">Password Reset.</h3><hr />
             <?php

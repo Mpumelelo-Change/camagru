@@ -14,15 +14,12 @@ if (!empty($_row['user_id']))
     $user->redirect('../index.php');
 }
 
-var_dump($_REQUEST);
-
 if (isset($row['user_id']))
 {
     $id = $row['user_id'];
 
     if ($stmt->rowCount() == 1)
     {
-        echo "the kid is not my son";
         if (isset($_POST['btn-reset-pass']))
         {
             $pass = $_POST['pass'];

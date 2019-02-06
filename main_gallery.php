@@ -31,17 +31,23 @@ $_SESSION[ 'user_mail' ] = $row[ 'user_mail' ];
     </style>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
     <script type="text/javascript">
-    function post()
+
+    function post(image_id)
     {
-        var comment = document.getElementById("comment").value;
-  
-        if(comment) {
+        var comment = document.getElementById(image_id).value;
+
+        if(comment && image_id) {
             $.ajax({
-                type: 'post',
+                type: 'POST',
                 url: 'functions/post_comment.php',
+                cache: false,
+
+                dataType: "text/plain",
+                ContentType: "charset=utf-8",
                 data: 
                 {
-                    user_comm:comment,
+                    'user_comm':comment,
+                    'iden':image_id
                 },
                 success: function (response) 
                 {
@@ -59,6 +65,7 @@ $_SESSION[ 'user_mail' ] = $row[ 'user_mail' ];
     <button class="btn-capt"><a href="capture.php">Capture</a></button>
     <button class="btn-capt"><a href="reset.php">Reset Password</a></button>
     <button class="btn-capt"><a href="functions/logout.php">Logout</a></button>
+    <button class="btn-capt"><a href="profile.php">Profile</a></button>
 </div>
 <div class="image-container">
     <?php
@@ -77,20 +84,25 @@ $_SESSION[ 'user_mail' ] = $row[ 'user_mail' ];
         session_start();
         if ($stmt->rowCount() > 0)
         {
-            $assc_arr = array();
             while ($row = $stmt->fetch()) {
                 $img = str_replace(' ', '+', $row['title']);
-                $assc_arr += array($img=>$row['image_id']);
                 echo '
                 <div class="img-com-container">
                 <img src= ' . $img . ' />
-                <form method="post" action="" onsubmit="return post();">
-                    <textarea id="comment" placeholder="write your comment here..."></textarea>
+                <br>
+                <form method="post" action="" onsubmit="post('.$row['image_id'].');">
+                    <textarea id="'.$row['image_id'].'" placeholder="write your comment here..."></textarea>
+                    <textarea style="display:none;" id="'.$row['title'].'">'.$row['image_id'].'</textarea>
                     <br>
                     <input type="submit" value="Post Comment">
+                    <form method="post" onsubmit="">
+                        <input type="submit" value="Like">
+                        <input type="submit" value="Dislike">
+                    </form>
                 </form>
                 <div id="all_comments">
                     <div id="comment_div">';
+                
                 $comm = $conn->prepare("SELECT * FROM camagru_db.comments");
                 $comm->execute();
                 while($s_row = $comm->fetch())
@@ -106,7 +118,6 @@ $_SESSION[ 'user_mail' ] = $row[ 'user_mail' ];
                 </div>';
                 }
            }
-           $_SESSION['assc_arr'] = $assc_arr;
         }
         else
         {

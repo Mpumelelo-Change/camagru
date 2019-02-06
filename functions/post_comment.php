@@ -11,9 +11,9 @@ session_start();
 if (isset($_POST['user_comm'])) {
     
     $comment = $_POST['user_comm'];
-    $id = $_SESSION['image_id'];
+    $id = $_POST['iden'];
 
-    $stmt = $conn->prepare("INSERT INTO camagru_db.comments(comment, image_id) VALUES ('$comment', '$id')");
+    $stmt = $conn->prepare("INSERT INTO `camagru_db`.`comments`(`comment`, `image_id`) VALUES('$comment', '$id')");
     $stmt->execute();
 
     $selection = $conn->prepare("SELECT comment, image_id FROM camagru_db.comments WHERE comment='$comment'");
